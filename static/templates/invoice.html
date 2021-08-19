@@ -1,0 +1,228 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Invoice</title>
+
+    <link rel="icon" href="/images/favicon.png" type="image/x-icon">
+
+    <style>
+        body {
+            font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+            text-align: center;
+            color: #777;
+        }
+        
+        body h1 {
+            font-weight: 300;
+            margin-bottom: 0px;
+            padding-bottom: 0px;
+            color: #000;
+        }
+        
+        body h3 {
+            font-weight: 300;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            font-style: italic;
+            color: #555;
+        }
+        
+        body a {
+            color: #06F;
+        }
+        
+        .invoice-box {
+            max-width: 800px;
+            margin: auto;
+            padding: 30px;
+            border: 1px solid #eee;
+            box-shadow: 0 0 10px rgba(0, 0, 0, .15);
+            font-size: 16px;
+            line-height: 24px;
+            font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+            color: #555;
+        }
+        
+        .invoice-box table {
+            width: 100%;
+            line-height: inherit;
+            text-align: left;
+        }
+        
+        .invoice-box table td {
+            padding: 5px;
+            vertical-align: top;
+        }
+        
+        .invoice-box table tr td:nth-child(2) {
+            text-align: right;
+        }
+        
+        .invoice-box table tr.top table td {
+            padding-bottom: 20px;
+        }
+        
+        .invoice-box table tr.top table td.title {
+            font-size: 45px;
+            line-height: 45px;
+            color: #333;
+        }
+        
+        .invoice-box table tr.information table td {
+            padding-bottom: 40px;
+        }
+        
+        .invoice-box table tr.heading td {
+            background: #eee;
+            border-bottom: 1px solid #ddd;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .invoice-box table tr.details td {
+            padding-bottom: 20px;
+        }
+        
+        .invoice-box table tr.item td {
+            border-bottom: 1px solid #eee;
+            text-align: center;
+        }
+        
+        .invoice-box table tr.item.last td {
+            border-bottom: none;
+            text-align: center;
+        }
+        
+        .invoice-box table tr.total td:nth-child(2) {
+            /* border-top: 2px solid #eee; */
+            font-weight: bold;
+        }
+        
+        @media only screen and (max-width: 600px) {
+            .invoice-box table tr.top table td {
+                width: 100%;
+                display: block;
+                text-align: center;
+            }
+            .invoice-box table tr.information table td {
+                width: 100%;
+                display: block;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="invoice-box">
+        <table cellpadding="0" cellspacing="0">
+            <tr class="top">
+                <td colspan="2">
+                    <table>
+                        <tr>
+                            <td class="title" style="text-align:center">
+                                <img src="http://staging.doodleflow.io/static/images/logo/beta-logo-black.svg" style="width:100%; max-width:300px;">
+                            </td>
+                            <!-- <td>
+								Invoice #: 123<br>
+								Created: January 1, 2015<br>
+								Due: February 1, 2015
+							</td> -->
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr class="information">
+                <td>
+                    <table>
+                        <tr>
+                            <td rowspan="3">
+                                <b>BILL TO</b><br>
+                                <b style="color: blue">doodleblue Innovations Private Limited</b><br> B2, #110 MG Road, Prakash Presidium,<br> Nungambakkam, Chennai – 600034, TN.
+                            </td>
+                            <td style="padding-bottom: 0px">
+                                <tr style="padding: 0px;">
+                                    <td>
+                                        <p style="margin: 0px"><b>Inovice ID </b>:
+                                        </p>
+                                        <p style="margin: 0px"><b>Invoice Date </b>:
+                                        </p>
+                                        <p style="text-transform: capitalize;margin: 0px;">
+                                            <b>Name </b>:
+                                        </p>
+                                        <p style="margin: 0px">
+                                            <b>Email</b>:
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p style="margin: 0px">{{invoiceId}}
+                                        </p>
+                                        <p style="margin: 0px">{{invoiceDate}}
+                                        </p>
+                                        <p style="text-transform: capitalize;margin: 0px;">
+                                            {{firstName }} {{lastName}}
+                                        </p>
+                                        <p style="margin: 0px">
+                                            <a href="mailto:email" class="__cf_email__">
+                                                {{ email }}
+                                            </a>
+                                        </p>
+                                    </td>
+                                </tr>
+
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+
+            <table>
+                <p style="font-weight: bold; margin: 0px;text-align: left;">Payment for <b>{{teamName}}</b></p>
+                <tr class="heading">
+                    <td>
+                        SNo.
+                    </td>
+                    <td>
+                        Members
+                    </td>
+                    <td>
+                        Duration
+                    </td>
+                    <td>
+                        Price
+                    </td>
+                </tr>
+                {{#each members as |item i|}}
+                <tr class="item">
+                    <td>
+                        {{plusOne i}}
+                    </td>
+                    <td>
+                        {{email}}
+                    </td>
+                    <td>
+                        {{noOfDays}} days
+                    </td>
+                    <td>
+                        ${{price}}
+                    </td>
+                </tr>
+                {{/each}}
+                <tr class="total">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <p><span style="font-weight: bold;">Total:</span> <span style="font-weight: bold;">${{totalPrice}}</span></p>
+                    </td>
+                </tr>
+            </table>
+        </table>
+    </div>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,15 @@
+<html>
+
+<body>
+  <h1 style="padding-top:25px;text-align: center">Selected Images</h1>
+  <div>
+
+    <% images.forEach(image => { %>
+      <div style="padding-top:50px;text-align: center">
+        <img src="<%- image%>" height="auto" width="240" align="center" />
+      </div>
+      <% }) %>
+  </div>
+</body>
+
+</html>

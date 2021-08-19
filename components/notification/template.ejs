@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title></title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,700,900&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box
+    }
+
+    body {
+      font-family: 'Lato', sans-serif;
+    }
+
+    .main-box {
+      width: 100%;
+    }
+
+    .border-box {
+      border: 1px solid #ddd;
+      padding: 2.5rem;
+      page-break-after: always;
+      size: 7in 9.25in;
+      margin: 50px 0px;
+      height: 1390px;
+    }
+
+    .shadow-img {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+    }
+
+    .grey-txt {
+      color: #6A6A6A
+    }
+
+    .f-bold {
+      font-weight: bold
+    }
+
+    .images-center {
+      padding: 5rem 0;
+    }
+
+    .color-dots {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .color-code {
+      color: #9A9A9A;
+      font-style: italic
+    }
+  </style>
+
+
+  <body>
+    <div class="p-5 main-box">
+      <div class="border-box d-flex flex-column position-relative">
+        <div class="text-center my-auto images-center" ">
+          <img src="<%-base_url%>static/images/pdf-assets/logo.png" />
+          <%if (projectDetails) {%>
+            <h1 class="mt-2">
+              <%-projectDetails.projectName%>
+            </h1>
+            <%}%>
+              <%if (focusGroupDetails) {%>
+                <h1 class="mt-2">
+                  <%-focusGroupDetails.groupName%>
+                </h1>
+                <%}%>
+                  <p style="color:#9A9A9A">
+                    <%- count%> Screens</p>
+        </div>
+        <div class="d-flex mt-auto align-items-end">
+          <div class="">
+            <%if(projectDetails) {%>
+              <p class="m-0">
+                <label class="grey-txt">Fonts : </label>
+                <%if (projectDetails.fonts) {%>
+                  <%-projectDetails.fonts.name%>
+                    <%}%>
+              </p>
+              <p class="m-0">
+                <label class="grey-txt">Industry : </label>
+                <%-projectDetails.industry.name%>
+              </p>
+              <%}%>
+                <div class="m-0 d-flex align-items-center">
+                  <%if (projectDetails) {%>
+                    <label class="grey-txt"> Tools used </label>
+
+                    <% projectDetails.tools.forEach(tools => { %>
+                      <div class="d-flex align-items-center">
+                        <img src="<%- base_url%>static/images/tools/<%-tools.icon%>.png" class="ml-2" width="40px" height="40px" />
+                        <!-- <%-tools.name%> -->
+                      </div>
+                      <% }) %>
+                        <% } %>
+
+                </div>
+          </div>
+
+          <div class="ml-auto text-right">
+            <%if(projectDetails) {%>
+              <h3 style="color: #006ADA;" class="f-bold">by
+                <%-projectDetails.userId.firstName%>
+                  <%-projectDetails.userId.lastName%>
+              </h3>
+              <%}%>
+
+                <p class="grey-txt m-0">Exported on
+                  <%-date%>
+                </p>
+                <div class="ml-auto text-right">
+                  <p class="m-0" style="color: #9A9A9A">1</p>
+                </div>
+          </div>
+        </div>
+
+        <img src="<%- base_url%>static/images/pdf-assets/shadow.png" class="shadow-img" />
+
+      </div>
+
+    </div>
+    <div class="p-5 main-box">
+      <% images.forEach((image, index) => { %>
+        <div class="border-box d-flex flex-column position-relative">
+
+          <div class="d-flex align-items-center">
+            <img src="<%-base_url%>static/images/pdf-assets/logo-sm.png" />
+            <%if(projectDetails){%>
+              <h5 class="m-0 pl-2 f-bold">
+                <%-projectDetails.projectName%>
+              </h5>
+              <%}%>
+                <%if(focusGroupDetails){%>
+                  <h5 class="m-0 pl-2 f-bold">
+                    <%-focusGroupDetails.groupName%>
+                  </h5>
+                  <%}%>
+                    <h5 class="ml-auto f-bold" style="color: #006ADA;">
+                      <%-image.screenName%>
+                    </h5>
+          </div>
+          <div class="text-center my-auto images-center">
+            <img src="<%- image.image%>" class="img-fluid" style="max-width: 50%;margin: 0 auto" />
+          </div>
+          <img src="<%- base_url%>static/images/pdf-assets/shadow.png" class="shadow-img" />
+
+          <div class="d-flex mt-auto align-items-end">
+
+            <div>
+              <%if(image.ratingType) {%>
+                <%if(image.ratingType.name){%>
+                  <div class="d-flex align-items-center">
+                    <img src="<%- base_url%>static/images/reactions/<%-image.ratingType.icon%>.png" width="40px" height="40px" />
+                    <span class="f-bold  pl-2">
+                      <%-image.ratingType.name%>
+                    </span>
+                  </div>
+                  <%}%>
+                    <%}%>
+                      <!-- <div class="d-flex align-items-center mt-2">
+              <div class="d-flex align-items-center mr-4">
+                <div class="color-dots" style="background: #10A4EC"></div>
+                <span class="color-code pl-1">10A4EC</span>
+              </div>
+              <div class="d-flex align-items-center mr-4">
+                <div class="color-dots" style="background: #FFC905"></div>
+                <span class="color-code pl-1">10A4EC</span>
+              </div>
+              <div class="d-flex align-items-center mr-4">
+                <div class="color-dots" style="background: #0D79DB"></div>
+                <span class="color-code pl-1">10A4EC</span>
+              </div>
+            </div> -->
+            </div>
+
+            <div class="ml-auto text-right">
+              <p class="m-0" style="color: #9A9A9A">
+                <%-index + 2%>
+              </p>
+            </div>
+          </div>
+
+        </div>
+        <% }) %>
+    </div>
+  </body>
+
+</html>

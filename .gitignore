@@ -1,0 +1,14 @@
+node_modules/
+package-lock.json
+dist/
+.env
+
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+*.log
+public/
+doodleflow-usage-report.xlsx

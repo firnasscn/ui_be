@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,900&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box
+        }
+        
+        html,
+        body {
+            height: auto;
+        }
+        
+        body {
+            font-family: 'Lato', sans-serif;
+            padding: 0;
+        }
+        
+        .main-box {
+            width: 100%;
+        }
+        
+        .border-box {
+            /* border: 1px solid #ddd; */
+            padding: 2.5rem;
+            /* page-break-before: always; */
+            /* size: 8.50in 11.00in; */
+            /* margin-top: 2.5rem; */
+            /* height: 39cm; */
+        }
+        
+        .shadow-img {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+        }
+        
+        .grey-txt {
+            color: #6A6A6A
+        }
+        
+        .f-bold {
+            font-weight: bold
+        }
+        
+        .images-center {
+            padding: 2rem 0;
+        }
+        
+        .color-dots {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+        
+        .color-code {
+            color: #9A9A9A;
+            font-style: italic
+        }
+        
+        .font-size {
+            font-size: 12px;
+        }
+        
+        @page {
+            margin-top: 1.25cm;
+            margin-bottom: 1.25cm;
+            border: 10px solid #ddd;
+        }
+        
+        @page :first {
+            margin-top: 2rem
+        }
+    </style>
+</head>
+
+<body>
+    <div class="p-3 main-box">
+        <div class="border-box d-flex flex-column position-relative m-0 p-0" style="border: 1px solid #ddd; padding: 2.5rem; page-break-before: always; size: 8.50in 11.00in; height: 39cm;">
+            <div class="text-center my-auto images-center">
+                <img src="<%-base_url%>static/images/pdf-assets/logo.png" />
+
+                <%if (focusGroupDetails) {%>
+                    <h1 class="mt-2">
+                        <%-focusGroupDetails.focusGroupName%>
+                    </h1>
+                    <%}%>
+                        <p style="color:#9A9A9A">
+                            <%- count%> Screens</p>
+            </div>
+            <div style="background-color: #F6F6F9" class="p-5">
+                <div class="d-flex mt-auto align-items-end">
+                    <div class="text-left">
+                        <%if(focusGroupDetails) {%>
+                            <h3 style="color: #000;" class="f-bold">Focus group Detail
+                            </h3>
+                            <div class="d-flex align-items-center">
+                                <%if (count) {%>
+                                    <h4 style="margin-right: 1rem" class="grey-txt">Screen Count :
+                                        <%-count%>
+                                    </h4>
+                                    <%}%>
+
+                                        <%if (versionCount) {%>
+                                            <h4 class="grey-txt">Version Count :
+                                                <%-versionCount%>
+                                            </h4>
+                                            <%}%>
+                            </div>
+                            <%}%>
+
+                    </div>
+                    <div class="ml-auto text-right">
+                        <%if(focusGroupDetails) {%>
+                            <h3 style="color: #006ADA;" class="f-bold m-0">by
+                                <%-focusGroupDetails.user[0].firstName%>
+                                    <%-focusGroupDetails.user[0].lastName%>
+                            </h3>
+                            <%}%>
+                                <h4 class="grey-txt mt-2">Exported on
+                                    <%-date%>
+                                </h4>
+                                <!-- <div class="ml-auto text-right">
+                                <p class="m-0" style="color: #9A9A9A">1</p>
+                            </div> -->
+                    </div>
+                </div>
+                <div class="d-flex align-items-end" style="margin-top: 1rem">
+                    <div class="text-left">
+                        <%if (invitedMembers.length > 0) {%>
+                            <% invitedMembers.forEach((member, index) => { %>
+                                <%if (index == 0) {%>
+                                    <h3 style="color: #000;" class="f-bold">Invited Members
+                                    </h3>
+                                    <div class="row no-gutters d-flex mt-auto" styyle="width: 100%">
+                                        <% invitedMembers.forEach((x, i) => { %>
+
+                                            <h4 class="px-2 py-3" style="background-color: #fff;width: 32%; margin:10px 10px 0px 0px">
+                                                <%-x.email%>
+                                            </h4>
+
+                                            <%})%>
+                                    </div>
+                                    <%}%>
+
+                                        <%})%>
+                                            <%}%>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <img src="<%- base_url%>static/images/pdf-assets/shadow.png" class="shadow-img" />
+
+        </div>
+
+    </div>
+
+
+
+
+
+    </div>
+    <div class="p-3 main-box" style="page-break-before: always;">
+
+        <% images.forEach((image, index) => { %>
+
+
+            <div class="border-box d-flex flex-column position-relative">
+
+                <div class="d-flex align-items-center">
+                    <img src="<%-base_url%>static/images/pdf-assets/logo-sm.png" />
+
+                    <h5 class="m-0 pl-2 f-bold">
+                        <%-image.focusGroupName%>
+                    </h5>
+                    <h5 class="ml-auto f-bold" style="color: #006ADA;">
+                        <%-image.screenName%>
+                    </h5>
+                </div>
+
+                <div class="text-center my-auto images-center">
+                    <img src="<%- image.image%>" class="img-fluid" style="max-width: 50%;margin: 0 auto; border: 10px solid black; object-fit:contain; max-height: 850px" />
+                </div>
+
+                <!-- <img src="<%- base_url%>static/images/pdf-assets/shadow.png" class="shadow-img" /> -->
+                <div style="padding: 50px">
+                    <% if(image.description) {%>
+                        <h4><strong>Description</strong> </h5>
+                            <hr/>
+                            <span>
+                                    <strong><%-image.description%></strong>
+                                </span>
+                            <%}%>
+                </div>
+
+                <div class="my-1">
+                    <% if(image.chats.length > 0 ) { %>
+                        <% image.chats.forEach((chat, index) => { %>
+                            <%if(index == 0) {%>
+                                <%if(chat.userName) {%>
+                                    <h4><strong>Chats</strong> </h5>
+                                        <hr/>
+                                        <%}%>
+                                            <%}%>
+                                                <div>
+
+                                                    <p style="font-size: 20px">
+                                                        <%if(chat.userName) {%>
+                                                            <span>
+                              <strong><%-chat.userName%>:</strong>
+                            </span>
+                                                            <%}%>
+                                                                <%if(chat.anonymousName) {%>
+                                                                    <span>
+                              <strong><%-chat.anonymousName%>:</strong>
+                            </span>
+                                                                    <%}%>
+                                                                        <span>
+                                <span>&nbsp;&nbsp;<%-chat.message%></span>
+                                                                        </span>
+                                                    </p>
+
+                                                </div>
+                                                <%})%>
+                                                    <%}%>
+                </div>
+
+
+                <div class="my-1">
+                    <% if(image.hotspots.length > 0) { %>
+                        <% image.hotspots.forEach((chat, index) => { %>
+                            <%if(index == 0) {%>
+                                <%if(chat.userName) {%>
+                                    <h4><strong>Onscreen Comments</strong> </h5>
+                                        <hr />
+                                        <%}%>
+                                            <%}%>
+                                                <div>
+
+                                                    <p style="font-size: 20px">
+                                                        <%if(chat.userName) {%>
+                                                            <span>
+                                        <strong><%-chat.userName%>:</strong>
+                                    </span>
+                                                            <%}%>
+                                                                <%if(chat.anonymousName) {%>
+                                                                    <span>
+                                        <strong><%-chat.anonymousName%>:</strong>
+                                    </span>
+                                                                    <%}%>
+                                                                        <span>
+                                                    <span>&nbsp;&nbsp;<%-chat.message%></span>
+                                                                        </span>
+                                                    </p>
+
+                                                </div>
+                                                <%})%>
+                                                    <%}%>
+                </div>
+
+
+                <!-- <div class="ml-auto text-right">
+                    <p class="m-0" style="color: #9A9A9A">
+                        <%-index + 2%>
+                    </p>
+                </div> -->
+
+            </div>
+            <% }) %>
+    </div>
+</body>
+
+</html>
